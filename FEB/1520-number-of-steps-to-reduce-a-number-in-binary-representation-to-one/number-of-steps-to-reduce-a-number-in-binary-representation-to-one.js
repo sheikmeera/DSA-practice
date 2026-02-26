@@ -3,38 +3,17 @@
  * @return {number}
  */
 var numSteps = function(s) {
-   let steps = 0;
+   let num = BigInt("0b" + s); 
+    let steps = 0n;
 
-    while (s !== "1") {
-
-        if (s[s.length - 1] === "0"){
-            s = s.slice(0, -1);
-        } 
-        else {
-            
-            s = addOne(s);
+    while (num !== 1n) {
+        if (num % 2n === 0n) {
+            num = num / 2n;
+        } else {
+            num = num + 1n;
         }
-
         steps++;
     }
 
-    return steps;
-};
-
-function addOne(s) {
-    let arr = s.split("");
-    let i = arr.length - 1;
-
-    while (i >= 0 && arr[i] === "1") {
-        arr[i] = "0";
-        i--;
-    }
-
-    if (i >= 0) {
-        arr[i] = "1";
-    } else {
-        arr.unshift("1");
-    }
-
-    return arr.join("");
+    return Number(steps);
 }
