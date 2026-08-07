@@ -10,40 +10,24 @@
  * @return {ListNode}
  */
 var mergeKLists = function(lists) {
-    if (lists.length === 0) return null;
+    const arr = [];
 
-    while (lists.length > 1) {
-        const mergedLists = [];
-
-        for (let i = 0; i < lists.length; i += 2) {
-            const l1 = lists[i];
-            const l2 = i + 1 < lists.length ? lists[i + 1] : null;
-
-            mergedLists.push(mergeTwoLists(l1, l2));
+    for (let head of lists) {
+        while (head) {
+            arr.push(head.val);
+            head = head.next;
         }
-
-        lists = mergedLists;
     }
 
-    return lists[0];
-};
+    arr.sort((a, b) => a - b);
 
-function mergeTwoLists(l1, l2) {
     const dummy = new ListNode(-1);
     let curr = dummy;
 
-    while (l1 && l2) {
-        if (l1.val <= l2.val) {
-            curr.next = l1;
-            l1 = l1.next;
-        } else {
-            curr.next = l2;
-            l2 = l2.next;
-        }
+    for (let num of arr) {
+        curr.next = new ListNode(num);
         curr = curr.next;
     }
 
-    curr.next = l1 || l2;
-
     return dummy.next;
-}
+};
