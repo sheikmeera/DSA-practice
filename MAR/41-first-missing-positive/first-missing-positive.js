@@ -5,17 +5,17 @@
 var firstMissingPositive = function(nums) {
     const set = new Set();
 
-for (const num of nums) {
-    if (num > 0) {
-        set.add(num);
+    for (const num of nums) {
+        if (num > 0) {
+            set.add(num);
+        }
     }
-}
 
-let i = 1;
+    let i = 1;
 
-while (set.has(i)) {
-    i++;
-}
+    while (set.has(i)) {
+        i++;
+    }
 
-return i;
+    return i;
 };
